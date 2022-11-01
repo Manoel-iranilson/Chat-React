@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.3.6",
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "framer-motion": "^7.6.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "email-validator": "^2.0.4",
+    "firebase": "^9.12.1",
+    "framer-motion": "^7.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.0.3",
     "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
