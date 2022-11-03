@@ -1,34 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect } from 'react'
+import { auth, db } from './services/firebase'
+import { useAuthState } from "react-firebase-hooks/auth"
+import PublicRoutes from './routes/public.routes';
+import PrivateRoutes from './routes/private.routes';
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useAuthState(auth);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+  useEffect(() => {
+    if (user) {
+      db.collection('users').doc(user.uid).set({
+        email: user.email,
+        photoURL: user.photoURL,
+      })
+    }
+  }, [user])
+
+
+  return user ? <PrivateRoutes /> : <PublicRoutes />
+
 }
 
 export default App
