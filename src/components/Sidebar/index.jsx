@@ -5,8 +5,9 @@ import * as EmailValidator from "email-validator"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { auth, db } from '../../services/firebase';
+import ChatItem from '../chatItem';
 
-function Sidebar() {
+function Sidebar({ userchat, setUserChat }) {
     const [user] = useAuthState(auth)
 
     const refChat = db
@@ -39,8 +40,6 @@ function Sidebar() {
             users: [user.email, emailInput],
         })
 
-
-
     }
 
 
@@ -48,11 +47,25 @@ function Sidebar() {
         <Box bg={"#000"} h={"100vh"} w={"25vw"} p={5}>
             <Flex justifyContent={"space-between"}>
                 <Image
+                    borderRadius={100}
                     src={user?.photoURL}
-                    onClick={() => auth.signOut()}
+                    onClick={() => [auth.signOut(), setUserChat(null)]}
                 />
-                <AiOutlineUserAdd onClick={createChat} size={30} color={"#fff"} />
+                <AiOutlineUserAdd onClick={createChat} size={50} color={"#fff"} />
             </Flex>
+
+            {chatsSnapShot?.docs.map((item, index) => (
+                <div key={index}>
+                    <ChatItem
+                        id={item.id}
+                        users={item.data().users}
+                        user={user}
+                        setUserChat={setUserChat()}
+                    />
+                </div>
+            ))}
+
+
         </Box >
     );
 }
