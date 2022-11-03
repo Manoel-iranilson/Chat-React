@@ -45,14 +45,13 @@ function Sidebar() {
 
 
     return (
-        <Box bg={"#000"} h={"100vh"} w={"25vw"}>
-            <Flex>
+        <Box bg={"#000"} h={"100vh"} w={"25vw"} p={5}>
+            <Flex justifyContent={"space-between"}>
                 <Image
                     src={user?.photoURL}
                     onClick={() => auth.signOut()}
                 />
                 <AiOutlineUserAdd onClick={createChat} size={30} color={"#fff"} />
-
             </Flex>
         </Box >
     );
