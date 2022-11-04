@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Button, Flex, Image } from '@chakra-ui/react';
 import { AiOutlineUserAdd } from "react-icons/ai"
 import * as EmailValidator from "email-validator"
@@ -6,9 +6,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { auth, db } from '../../services/firebase';
 import ChatItem from '../chatItem';
+import MyContext from '../../context/myContext';
 
-function Sidebar({ userchat, setUserChat }) {
+
+function Sidebar() {
     const [user] = useAuthState(auth)
+    const { userChat, setUserChat } = useContext(MyContext)
 
     const refChat = db
         .collection("chats")
@@ -44,26 +47,32 @@ function Sidebar({ userchat, setUserChat }) {
 
 
     return (
-        <Box bg={"#000"} h={"100vh"} w={"25vw"} p={5}>
-            <Flex justifyContent={"space-between"}>
+        <Box h={"90vh"} w={"25vw"} >
+            <Flex justifyContent={"space-between"} bg={"#1f2c34"} pt={7} pl={3} pr={3} >
                 <Image
                     borderRadius={100}
+                    h={20}
+                    w={20}
+                    cursor={"pointer"}
                     src={user?.photoURL}
-                    onClick={() => [auth.signOut(), setUserChat(null)]}
+                    onClick={() => [auth.signOut(), setUserChat(1)]}
                 />
-                <AiOutlineUserAdd onClick={createChat} size={50} color={"#fff"} />
+                <Box onClick={createChat} cursor={"pointer"} color={"#fff"}  >
+                    <AiOutlineUserAdd size={50} />
+                </Box>
             </Flex>
 
-            {chatsSnapShot?.docs.map((item, index) => (
-                <div key={index}>
-                    <ChatItem
-                        id={item.id}
-                        users={item.data().users}
-                        user={user}
-                        setUserChat={setUserChat()}
-                    />
-                </div>
-            ))}
+            <Box bg={" #121b22"} h={"100%"}>
+                {chatsSnapShot?.docs.map((item, index) => (
+                    <div key={index} >
+                        <ChatItem
+                            id={item.id}
+                            users={item.data().users}
+                            user={user}
+                        />
+                    </div>
+                ))}
+            </Box>
 
 
         </Box >
