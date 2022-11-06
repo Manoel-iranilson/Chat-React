@@ -30,7 +30,7 @@ function ChatItem({ id, users, user }) {
 
     return (
         <Flex onClick={handleNewChat} cursor={"pointer"} p={3} pt={4} borderBottom={"1px"} borderColor={"#c3c3c3"} _hover={{ bg: "#1f2c34" }}>
-            {avatar ? <Image boxSize={"20"} borderRadius={100} src={avatar.photoURL} /> : <BsPersonCircle size={40} color={"#fff"} />}
+            {avatar ? <Image boxSize={"12"} borderRadius={100} src={avatar.photoURL} /> : <BsPersonCircle size={45} color={"#fff"} />}
             <Center>
                 <Text color={"#fff"} pl={3} pt={1} >{item.split("@")[0]}</Text>
             </Center>
