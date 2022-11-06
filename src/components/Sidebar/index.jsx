@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, Button, Flex, Image } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Image } from '@chakra-ui/react';
 import { AiOutlineUserAdd } from "react-icons/ai"
 import * as EmailValidator from "email-validator"
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -47,8 +47,8 @@ function Sidebar() {
 
 
     return (
-        <Box h={"90vh"} w={"25vw"} >
-            <Flex justifyContent={"space-between"} bg={"#1f2c34"} pt={7} pl={3} pr={3} >
+        <Box h={"83.1vh"} w={"25vw"} >
+            <Flex justifyContent={"space-between"} bg={"#1f2c34"} pt={6} pl={3} pr={3} >
                 <Image
                     borderRadius={100}
                     h={20}
@@ -57,6 +57,7 @@ function Sidebar() {
                     src={user?.photoURL}
                     onClick={() => [auth.signOut(), setUserChat(1)]}
                 />
+
                 <Box onClick={createChat} cursor={"pointer"} color={"#fff"}  >
                     <AiOutlineUserAdd size={50} />
                 </Box>
