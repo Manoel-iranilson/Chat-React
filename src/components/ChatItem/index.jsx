@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Center, Flex, Image, Text } from '@chakra-ui/react';
 import { BsPersonCircle } from "react-icons/bs"
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { db } from '../../services/firebase';
@@ -29,9 +29,11 @@ function ChatItem({ id, users, user }) {
 
 
     return (
-        <Flex onClick={handleNewChat} p={3} pt={4} borderBottom={"1px"} borderColor={"#c3c3c3"} _hover={{ bg: "#1f2c34" }}>
-            {avatar ? <Image src={avatar?.photoURL} /> : <BsPersonCircle size={40} color={"#fff"} />}
-            <Text color={"#fff"} pl={3} pt={1} >{item.split("@")[0]}</Text>
+        <Flex onClick={handleNewChat} cursor={"pointer"} p={3} pt={4} borderBottom={"1px"} borderColor={"#c3c3c3"} _hover={{ bg: "#1f2c34" }}>
+            {avatar ? <Image boxSize={"20"} borderRadius={100} src={avatar.photoURL} /> : <BsPersonCircle size={40} color={"#fff"} />}
+            <Center>
+                <Text color={"#fff"} pl={3} pt={1} >{item.split("@")[0]}</Text>
+            </Center>
         </Flex>
 
     );
