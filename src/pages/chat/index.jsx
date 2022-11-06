@@ -39,9 +39,7 @@ function Chat() {
 
                 {userChat == null ?
                     <Flex w={"100vw"} h={"100vh"} backgroundImage={image} >
-
                     </Flex>
-
                     :
 
                     <Flex flexDirection={"column"}>
@@ -53,7 +51,7 @@ function Chat() {
                         </Flex>
                         <ChatBody chatId={userChat?.chatId} />
                         <Flex bg={"#1f2c34"}>
-                            <Input bg={"#1f2c34"} w={"60rem"} color={"#fff"} placeholder='Basic usage' value={message} onChange={(e) => setMessage(e.target.value)} />
+                            <Input bg={"#1f2c34"} w={"60rem"} color={"#fff"} placeholder='Escreva aqui...' value={message} onChange={(e) => setMessage(e.target.value)} />
                             <Button onClick={sendMessage}> <MdSend size={20} /> </Button>
                         </Flex>
                     </Flex>
