@@ -20,7 +20,7 @@ function ChatBody({ chatId }) {
     return (
         <>
             {isDesktop ?
-                <Flex h={"76.5vh"} direction='column' overflowY={"auto"} backgroundImage={image} color={"#fff"} >
+                <Flex h={"100vh"} direction='column' overflowY={"auto"} backgroundImage={image} color={"#fff"} >
                     {messagesRes?.docs.map((message) => {
                         if (userLoggenIn.email === message.data().user) {
                             return (
