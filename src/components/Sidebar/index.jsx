@@ -1,10 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
     Box, Button, Center, Flex, Image, useBreakpointValue, Drawer, useDisclosure, DrawerBody,
     DrawerHeader,
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    Input
 } from '@chakra-ui/react';
 import { AiOutlineUserAdd, AiOutlineRollback } from "react-icons/ai"
 import * as EmailValidator from "email-validator"
@@ -20,6 +28,7 @@ function Sidebar() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef()
 
+    const [email, setEmail] = useState('')
     const [user] = useAuthState(auth)
     const { userChat, setUserChat } = useContext(MyContext)
 
@@ -37,22 +46,22 @@ function Sidebar() {
     }
 
     const createChat = () => {
-        const emailInput = prompt("escreva")
 
-        if (!emailInput) return;
+        if (!email) return;
 
-        if (!EmailValidator.validate(emailInput)) {
+        if (!EmailValidator.validate(email)) {
             return alert("email invalido")
-        } else if (emailInput === user.email) {
+        } else if (email === user.email) {
             return alert("Insira um email diferendo seu")
-        } else if (chatExists(emailInput)) {
+        } else if (chatExists(email)) {
             return alert("email ja existe")
         }
 
         db.collection("chats").add({
-            users: [user.email, emailInput],
+            users: [user.email, email],
         })
 
+        setEmail('')
     }
 
 
@@ -70,8 +79,24 @@ function Sidebar() {
                             onClick={() => [auth.signOut(), setUserChat(1)]}
                         />
 
-                        <Box onClick={createChat} cursor={"pointer"} color={"#fff"}  >
-                            <AiOutlineUserAdd size={50} />
+                        <Box cursor={"pointer"} color={"#fff"}  >
+                            <AiOutlineUserAdd size={50} onClick={onOpen} />
+                            <Modal isOpen={isOpen} onClose={onClose} >
+                                <ModalOverlay />
+                                <ModalContent>
+                                    <ModalHeader>Adicionar Contatos</ModalHeader>
+                                    <ModalCloseButton />
+                                    <ModalBody>
+                                        <Input type='email' placeholder='Digite o email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button colorScheme='blue' mr={3} onClick={onClose}>
+                                            Cancelar
+                                        </Button>
+                                        <Button variant='ghost' onClick={() => { onClose(); createChat() }} >Adicionar</Button>
+                                    </ModalFooter>
+                                </ModalContent>
+                            </Modal>
                         </Box>
                     </Flex>
 
