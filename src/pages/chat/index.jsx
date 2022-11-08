@@ -56,14 +56,11 @@ function Chat() {
                                 </Flex>
                             </Flex>
                         }
-
                     </>
                     :
                     <>
                         {userChat == null ?
                             <Flex w={"100vw"} h={"100vh"} justifyContent="center" flexDirection="column" backgroundImage={image} >
-
-
                                 <Text fontSize="5xl" color={"#fff"}>
                                     Abra os Contatos
                                 </Text>
