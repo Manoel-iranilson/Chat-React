@@ -39,6 +39,7 @@ function Chat() {
                         <Sidebar />
                         {userChat == null ?
                             <Flex w={"80vw"} h={"100vh"} backgroundImage={image} >
+
                             </Flex>
                             :
                             <Flex w="100%" h="100%" flexDirection={"column"}>
@@ -60,8 +61,19 @@ function Chat() {
                     :
                     <>
                         {userChat == null ?
-                            <Flex w={"100vw"} h={"100vh"} backgroundImage={image} >
-                                <Sidebar />
+                            <Flex w={"100vw"} h={"100vh"} justifyContent="center" flexDirection="column" backgroundImage={image} >
+
+
+                                <Text fontSize="5xl" color={"#fff"}>
+                                    Abra os Contatos
+                                </Text>
+                                <Center>
+
+                                    <Sidebar />
+                                </Center>
+
+
+
                             </Flex>
                             :
                             <Flex flexDirection={"column"} bg="#1f2c34" w="100%" h="100%"  >
