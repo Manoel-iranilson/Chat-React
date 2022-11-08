@@ -25,7 +25,8 @@ import MyContext from '../../context/myContext';
 
 function Sidebar() {
     const isDesktop = useBreakpointValue({ lg: "none" });
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure()
+    const { isOpen: isOpenDrawer, onOpen: onOpenDrawer, onClose: onCloseDrawer } = useDisclosure()
     const btnRef = React.useRef()
 
     const [email, setEmail] = useState('')
@@ -80,8 +81,8 @@ function Sidebar() {
                         />
 
                         <Box cursor={"pointer"} color={"#fff"}  >
-                            <AiOutlineUserAdd size={50} onClick={onOpen} />
-                            <Modal isOpen={isOpen} onClose={onClose} >
+                            <AiOutlineUserAdd size={50} onClick={onOpenModal} />
+                            <Modal isOpen={isOpenModal} onClose={onCloseModal} >
                                 <ModalOverlay />
                                 <ModalContent>
                                     <ModalHeader>Adicionar Contatos</ModalHeader>
@@ -90,10 +91,10 @@ function Sidebar() {
                                         <Input type='email' placeholder='Digite o email' value={email} onChange={(e) => setEmail(e.target.value)} />
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button colorScheme='blue' mr={3} onClick={onClose}>
+                                        <Button colorScheme='blue' mr={3} onClick={onCloseModal}>
                                             Cancelar
                                         </Button>
-                                        <Button variant='ghost' onClick={() => { onClose(); createChat() }} >Adicionar</Button>
+                                        <Button variant='ghost' onClick={() => { [onCloseModal()];[createChat()] }} >Adicionar</Button>
                                     </ModalFooter>
                                 </ModalContent>
                             </Modal>
@@ -114,13 +115,13 @@ function Sidebar() {
                 </Box >
                 :
                 <Box w={"25vw"} >
-                    <Button ref={btnRef} colorScheme='teal' onClick={onOpen}>
+                    <Button ref={btnRef} colorScheme='teal' onClick={onOpenDrawer}>
                         <AiOutlineRollback size={20} />
                     </Button>
                     <Drawer
-                        isOpen={isOpen}
+                        isOpen={isOpenDrawer}
                         placement='left'
-                        onClose={onClose}
+                        onClose={onCloseDrawer}
                         finalFocusRef={btnRef}
                     >
                         <DrawerOverlay />
@@ -137,8 +138,24 @@ function Sidebar() {
                                         onClick={() => [auth.signOut(), setUserChat(1)]}
                                     />
 
-                                    <Box onClick={createChat} cursor={"pointer"} color={"#fff"}  >
-                                        <AiOutlineUserAdd size={50} />
+                                    <Box cursor={"pointer"} color={"#fff"}  >
+                                        <AiOutlineUserAdd size={50} onClick={onOpenModal} />
+                                        <Modal isOpen={isOpenModal} onClose={onCloseModal} >
+                                            <ModalOverlay />
+                                            <ModalContent>
+                                                <ModalHeader>Adicionar Contatos</ModalHeader>
+                                                <ModalCloseButton />
+                                                <ModalBody>
+                                                    <Input type='email' placeholder='Digite o email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                                                </ModalBody>
+                                                <ModalFooter>
+                                                    <Button colorScheme='blue' mr={3} onClick={onCloseModal}>
+                                                        Cancelar
+                                                    </Button>
+                                                    <Button variant='ghost' onClick={() => { [onCloseModal()];[createChat()] }} >Adicionar</Button>
+                                                </ModalFooter>
+                                            </ModalContent>
+                                        </Modal>
                                     </Box>
                                 </Flex>
 
@@ -147,7 +164,7 @@ function Sidebar() {
                             <DrawerBody p={0}>
                                 <Box bg={" #121b22"} h={"100%"} w={"100%"}>
                                     {chatsSnapShot?.docs.map((item, index) => (
-                                        <div key={index} onClick={onClose} >
+                                        <div key={index} onClick={onCloseModal} >
                                             <ChatItem
                                                 id={item.id}
                                                 users={item.data().users}
