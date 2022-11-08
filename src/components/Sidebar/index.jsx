@@ -15,6 +15,7 @@ import {
     Input
 } from '@chakra-ui/react';
 import { AiOutlineUserAdd, AiOutlineRollback } from "react-icons/ai"
+import { GrContactInfo } from "react-icons/gr"
 import * as EmailValidator from "email-validator"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore'
@@ -116,7 +117,12 @@ function Sidebar() {
                 :
                 <Box w={"25vw"} >
                     <Button ref={btnRef} colorScheme='teal' onClick={onOpenDrawer}>
-                        <AiOutlineRollback size={20} />
+                        {userChat == null ?
+                            <GrContactInfo size={50} color={"#fff"} />
+                            :
+                            <AiOutlineRollback size={20} />
+                        }
+
                     </Button>
                     <Drawer
                         isOpen={isOpenDrawer}
