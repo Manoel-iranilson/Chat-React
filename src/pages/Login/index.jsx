@@ -9,8 +9,8 @@ function Login() {
     }
 
     return (
-        <Flex>
-            <Button colorScheme='blue' onClick={handleSignin}>Button</Button>
+        <Flex justifyContent="center" pt="20rem" >
+            <Button colorScheme='blue' onClick={handleSignin}>Entrar com Google</Button>
         </Flex>
     );
 }
