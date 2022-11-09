@@ -49,7 +49,7 @@ function ChatBody({ chatId }) {
                     }
                 </Body >
                 :
-                <Flex direction='column' h="100vh" w={"100%"} overflowY={"scroll"} backgroundImage={image} color={"#fff"} >
+                <Body ref={refBody}>
                     {messagesRes?.docs.map((message) => {
                         if (userLoggenIn.email === message.data().user) {
                             return (
@@ -71,7 +71,7 @@ function ChatBody({ chatId }) {
                     }
                     )
                     }
-                </Flex>
+                </Body>
             }
         </>
     );
