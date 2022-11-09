@@ -45,7 +45,7 @@ function Chat() {
                             <Flex w="100%" h="100%" flexDirection={"column"}>
                                 <Flex h={105} bg={"#1f2c34"} p={3} >
                                     <Center>
-                                        {userChat.photoURL ? <Image boxSize={"20"} borderRadius={100} src={userChat?.photoURL} /> : <BsPersonCircle size={40} color={"#fff"} />}
+                                        {userChat.photoURL ? <Image boxSize={"20"} borderRadius={100} src={userChat.photoURL} /> : <BsPersonCircle size={40} color={"#fff"} />}
                                         <Text textColor={"#fff"} fontSize={20} pl={5}>{userChat?.name}</Text>
                                     </Center>
                                 </Flex>
