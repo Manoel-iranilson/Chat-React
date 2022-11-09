@@ -20,7 +20,7 @@ import * as EmailValidator from "email-validator"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { auth, db } from '../../services/firebase';
-import ChatItem from '../chatItem';
+import ChatItem from '../ChatItem';
 import MyContext from '../../context/myContext';
 
 
