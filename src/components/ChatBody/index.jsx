@@ -25,26 +25,26 @@ function ChatBody({ chatId }) {
                     {messagesRes?.docs.map((message) => {
                         if (userLoggenIn.email === message.data().user) {
                             return (
-                                <Box textAlign={'end'} borderRadius={5} bg={"#8FBC8F"} ml={"50rem"} mt={5} mb={4} mr={5} >
-                                    <Text mr={5} fontSize={20} >{message.data().message}</Text>
+                                <Box key={message.id} textAlign={'end'} borderRadius={5} bg={"#8FBC8F"} ml={"50rem"} mt={5} mb={4} mr={5}>
+                                    < Text mr={5} fontSize={20} > {message.data().message}</Text>
                                 </Box>
                             )
                         } else {
                             return (
-                                <Box borderRadius={5} bg={"	#808080"} w={"12rem"} m={5} >
+                                <Box key={message.id} borderRadius={5} bg={"	#808080"} w={"12rem"} m={5} >
                                     <Text ml={5} fontSize={20} >{message.data().message}</Text>
                                 </Box>)
                         }
                     }
                     )
                     }
-                </Body>
+                </Body >
                 :
                 <Flex direction='column' h="100vh" w={"100%"} overflowY={"scroll"} backgroundImage={image} color={"#fff"} >
                     {messagesRes?.docs.map((message) => {
                         if (userLoggenIn.email === message.data().user) {
                             return (
-                                <Flex justifyContent="flex-end">
+                                <Flex key={message.id} justifyContent="flex-end">
                                     <Box textAlign={'end'} borderRadius={5} bg={"#8FBC8F"} w={"10rem"} mt={5} mb={4} mr={5} >
                                         <Text mr={5} fontSize={20} >{message.data().message}</Text>
                                     </Box>
@@ -52,7 +52,7 @@ function ChatBody({ chatId }) {
                             )
                         } else {
                             return (
-                                <Flex>
+                                <Flex key={message.id} >
                                     <Box borderRadius={5} bg={"	#808080"} w={"10rem"} m={5} >
                                         <Text ml={5} fontSize={20} >{message.data().message}</Text>
                                     </Box>
