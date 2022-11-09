@@ -21,7 +21,7 @@ function ChatItem({ id, users, user }) {
         const userChat = {
             chatId: id,
             name: item.split("@")[0],
-            photoURL: avatar?.photoURL,
+            photoURL: avatar.photoURL,
         };
         setUserChat(userChat);
 
