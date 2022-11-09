@@ -140,7 +140,7 @@ function Sidebar() {
                                         h={20}
                                         w={20}
                                         cursor={"pointer"}
-                                        src={user?.photoURL}
+                                        src={user.photoURL}
                                         onClick={() => [auth.signOut(), setUserChat(1)]}
                                     />
 
