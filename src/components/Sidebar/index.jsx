@@ -23,7 +23,6 @@ import { auth, db } from '../../services/firebase';
 import ChatItem from '../ChatItem';
 import MyContext from '../../context/myContext';
 
-
 function Sidebar() {
     const isDesktop = useBreakpointValue({ lg: "none" });
     const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure()
@@ -62,7 +61,6 @@ function Sidebar() {
         db.collection("chats").add({
             users: [user.email, email],
         })
-
         setEmail('')
     }
 
