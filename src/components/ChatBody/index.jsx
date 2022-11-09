@@ -18,10 +18,19 @@ function ChatBody({ chatId }) {
             .orderBy("timestamp", "asc")
     )
 
+    const refBody = useRef("");
+
+    useEffect(() => {
+        if (refBody.current.scrollHeight > refBody.current.offsetHeight) {
+            refBody.current.scrollTop =
+                refBody.current.scrollHeight - refBody.current.offsetHeight;
+        }
+    }, [messagesRes]);
+
     return (
         <>
             {isDesktop ?
-                <Body>
+                <Body ref={refBody}>
                     {messagesRes?.docs.map((message) => {
                         if (userLoggenIn.email === message.data().user) {
                             return (
