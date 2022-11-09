@@ -9,7 +9,7 @@ function Login() {
     }
 
     return (
-        <Flex justifyContent="center" pt="20rem" >
+        <Flex justifyContent="center" pt="20rem">
             <Button colorScheme='blue' onClick={handleSignin}>Entrar com Google</Button>
         </Flex>
     );
