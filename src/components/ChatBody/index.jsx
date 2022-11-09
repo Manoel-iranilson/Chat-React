@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { auth, db } from '../../services/firebase';
 import image from '../../assets/image.webp'
+import { Body } from './styles';
 
 function ChatBody({ chatId }) {
     const isDesktop = useBreakpointValue({ lg: "none" });
@@ -20,7 +21,7 @@ function ChatBody({ chatId }) {
     return (
         <>
             {isDesktop ?
-                <Flex h={"100vh"} direction='column' overflowY={"auto"} backgroundImage={image} color={"#fff"} >
+                <Body>
                     {messagesRes?.docs.map((message) => {
                         if (userLoggenIn.email === message.data().user) {
                             return (
@@ -37,7 +38,7 @@ function ChatBody({ chatId }) {
                     }
                     )
                     }
-                </Flex>
+                </Body>
                 :
                 <Flex direction='column' h="100vh" w={"100%"} overflowY={"scroll"} backgroundImage={image} color={"#fff"} >
                     {messagesRes?.docs.map((message) => {
